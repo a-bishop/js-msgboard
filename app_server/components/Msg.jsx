@@ -5,7 +5,6 @@ class Msg extends React.Component {
     super(props);
     this.handleMessage = this.handleMessage.bind(this);
     this.state = {
-      name: "",
       message: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -18,22 +17,16 @@ class Msg extends React.Component {
     this.props.handleMsgCallback(
       id,
       action,
-      this.state.name,
+      this.props.name,
       this.state.message,
-      this.props.messageCreator
+      this.props.userEmail
     );
   }
 
   handleChange(event) {
-    if (event.target.id === "name") {
-      this.setState({
-        name: event.target.value
-      });
-    } else if (event.target.id === "message") {
-      this.setState({
-        message: event.target.value
-      });
-    }
+    this.setState({
+      message: event.target.value
+    });
   }
 
   render() {
@@ -90,16 +83,7 @@ class Msg extends React.Component {
       table = (
         <tr>
           <td>{this.props.displayId}</td>
-          <td>
-            <input
-              id="name"
-              type="text"
-              className="form-control"
-              placeholder="Edit Name"
-              value={this.state.name}
-              onChange={this.handleChange}
-            />
-          </td>
+          <td>{this.props.name}</td>
           <td>
             <input
               id="message"

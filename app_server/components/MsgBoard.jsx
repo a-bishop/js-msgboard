@@ -15,6 +15,7 @@ class MsgBoard extends React.Component {
       loginFail: false,
       loading: true,
       loginMsg: "",
+      userName: "",
       userCredentials: {
         email: "",
         password: ""
@@ -115,7 +116,8 @@ class MsgBoard extends React.Component {
           userCredentials: userCredentials,
           loginForm: false,
           loginFail: false,
-          loginMsg: `Hello, ${result.username}`
+          loginMsg: `Hello, ${result.username}`,
+          userName: result.username
         });
       })
       .catch(error => {
@@ -189,7 +191,7 @@ class MsgBoard extends React.Component {
     console.log(id, action, name, message);
     if (action === "delete") {
       let idObj = { _id: id };
-      fetch(`${process.env.API_URL}/msgs/${id}`, {
+      fetch(`${process.env.API_URL}/msgs/${email}/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json"
@@ -209,7 +211,7 @@ class MsgBoard extends React.Component {
           console.log(error);
         });
     } else if (action === "edit") {
-      fetch(`${process.env.API_URL}/msgs/${id}`, {
+      fetch(`${process.env.API_URL}/msgs/${email}/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json"
@@ -227,7 +229,7 @@ class MsgBoard extends React.Component {
         });
     } else if (action === "update") {
       let body = JSON.stringify({ name: name, msg: message });
-      fetch(`${process.env.API_URL}/msgs/${id}`, {
+      fetch(`${process.env.API_URL}/msgs/${email}/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -317,7 +319,12 @@ class MsgBoard extends React.Component {
           />
         );
       } else {
-        form = <NewMsg addMsgCallback={this.addMessage} />;
+        form = (
+          <NewMsg
+            userName={this.state.userName}
+            addMsgCallback={this.addMessage}
+          />
+        );
       }
       if (!this.state.loading) {
         return (

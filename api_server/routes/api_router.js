@@ -17,7 +17,7 @@ router
   );
 
 router
-  .route("/msgs/:messageid")
+  .route("/msgs/:email/:messageid")
   .get(msgAPIController.showMessage)
   .put(msgAPIController.updateMessage)
   .delete(msgAPIController.deleteMessage);
