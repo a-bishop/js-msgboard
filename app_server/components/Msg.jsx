@@ -3,13 +3,13 @@ const React = require("react");
 class Msg extends React.Component {
   constructor(props) {
     super(props);
-    this.deleteMessage = this.deleteMessage.bind(this);
+    this.handleMessage = this.handleMessage.bind(this);
   }
 
-  deleteMessage() {
-    console.log(this.props);
+  handleMessage(event) {
     let id = this.props.id;
-    this.props.deleteMsgCallback(id);
+    let action = event.target.id;
+    this.props.handleMsgCallback(id, action);
   }
 
   render() {
@@ -21,9 +21,16 @@ class Msg extends React.Component {
       userActions = (
         <td>
           <button
-            type="submit"
+            id="edit"
+            className="btn btn-primary mr-3"
+            onClick={this.handleMessage}
+          >
+            Edit
+          </button>
+          <button
+            id="delete"
             className="btn btn-danger"
-            onClick={this.deleteMessage}
+            onClick={this.handleMessage}
           >
             Delete
           </button>

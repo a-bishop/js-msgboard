@@ -26,6 +26,18 @@ const addNewMessage = (req, res) => {
   });
 };
 
+const showMessage = (req, res) => {
+  messageModel.findById(req.body, (err, msg) => {
+    if (err) {
+      res.status(404).json(err);
+    } else {
+      res.status(200).send(msg);
+    }
+  });
+};
+
+const updateMessage = (req, res) => {};
+
 // DELETE Request Handler
 const deleteMessage = (req, res) => {
   messageModel.findOneAndDelete(req.body, (err, msg) => {
@@ -38,8 +50,13 @@ const deleteMessage = (req, res) => {
   });
 };
 
+const deleteAllMessages = (req, res) => {};
+
 module.exports = {
   getAllMessagesOrderedByLastPosted,
   addNewMessage,
-  deleteMessage
+  showMessage,
+  updateMessage,
+  deleteMessage,
+  deleteAllMessages
 };

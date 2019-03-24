@@ -11,6 +11,15 @@ router
     passport.authenticate("basic", { session: false }),
     msgAPIController.addNewMessage
   )
+  .delete(
+    passport.authenticate("basic", { session: false }),
+    msgAPIController.deleteAllMessages
+  );
+
+router
+  .route("/msgs/:messageid")
+  .get(msgAPIController.showMessage)
+  .put(msgAPIController.updateMessage)
   .delete(msgAPIController.deleteMessage);
 
 router.route("/users").post(userAPIController.registerNewUser);

@@ -8,15 +8,15 @@ class MsgList extends React.Component {
       messages: this.props.messages
     };
 
-    this.handleDelete = this.handleDelete.bind(this);
+    this.handleMessage = this.handleMessage.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({ messages: nextProps.messages });
   }
 
-  handleDelete(id) {
-    this.props.deleteMsgCallback(id);
+  handleMessage(id, action) {
+    this.props.handleMsgCallback(id, action);
   }
 
   render() {
@@ -48,7 +48,7 @@ class MsgList extends React.Component {
               userEmail={this.props.email}
               messageCreator={message.email}
               msg={message.msg}
-              deleteMsgCallback={this.handleDelete}
+              handleMsgCallback={this.handleMessage}
             />
           ))}
         </tbody>
