@@ -20,7 +20,8 @@ class MsgBoard extends React.Component {
         password: ""
       },
       registrationForm: false,
-      registrationFail: false
+      registrationFail: false,
+      messageEditable: 0
     };
 
     this.addMessage = this.addMessage.bind(this);
@@ -70,7 +71,7 @@ class MsgBoard extends React.Component {
     // for every item in React state
     for (let key in this.state) {
       // save to sessionStorage except sensitive credentials and the messages
-      if (key !== "messages" && key !== "loading")
+      if (key !== "messages" && key !== "loading" && key !== "messageEditable")
         sessionStorage.setItem(key, JSON.stringify(this.state[key]));
     }
   }
@@ -184,8 +185,8 @@ class MsgBoard extends React.Component {
       });
   }
 
-  handleMessage(id, action) {
-    console.log(this.state.loginForm);
+  handleMessage(id, action, name, message, email) {
+    console.log(id, action, name, message);
     if (action === "delete") {
       let idObj = { _id: id };
       fetch(`${process.env.API_URL}/msgs/${id}`, {
@@ -207,8 +208,55 @@ class MsgBoard extends React.Component {
         .catch(error => {
           console.log(error);
         });
-    } else if (action === "show") {
-      console.log(id);
+    } else if (action === "edit") {
+      fetch(`${process.env.API_URL}/msgs/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => this.handleHTTPErrors(response))
+        .then(result => result.json())
+        .then(result => {
+          this.setState({
+            messageEditable: result._id
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    } else if (action === "update") {
+      let body = JSON.stringify({ name: name, msg: message });
+      fetch(`${process.env.API_URL}/msgs/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: body
+      })
+        .then(response => this.handleHTTPErrors(response))
+        .then(result => result.json())
+        .then(result => {
+          console.log(this.state.messages);
+          let newMsgs = this.state.messages;
+          let msgIndex = newMsgs.findIndex(
+            message => result.id === message._id
+          );
+          newMsgs.splice(msgIndex, 1, {
+            _id: id,
+            email: email,
+            msg: message,
+            name: name
+          });
+          console.log(msgIndex);
+          this.setState({
+            messages: newMsgs,
+            messageEditable: 0
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 
@@ -285,6 +333,7 @@ class MsgBoard extends React.Component {
               email={this.state.userCredentials.email}
               messages={this.state.messages}
               handleMsgCallback={this.handleMessage}
+              messageEditable={this.state.messageEditable}
             />
           </React.Fragment>
         );

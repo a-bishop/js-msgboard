@@ -15,8 +15,8 @@ class MsgList extends React.Component {
     this.setState({ messages: nextProps.messages });
   }
 
-  handleMessage(id, action) {
-    this.props.handleMsgCallback(id, action);
+  handleMessage(id, action, name, message, email) {
+    this.props.handleMsgCallback(id, action, name, message, email);
   }
 
   render() {
@@ -49,6 +49,7 @@ class MsgList extends React.Component {
               messageCreator={message.email}
               msg={message.msg}
               handleMsgCallback={this.handleMessage}
+              messageEditable={this.props.messageEditable}
             />
           ))}
         </tbody>

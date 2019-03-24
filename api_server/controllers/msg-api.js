@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const messageModel = mongoose.model("message");
 
-// GET Request Handler
+// GET All Messages Request Handler
 const getAllMessagesOrderedByLastPosted = (req, res) => {
   messageModel
     .find()
@@ -15,7 +15,7 @@ const getAllMessagesOrderedByLastPosted = (req, res) => {
     });
 };
 
-// POST Request Handler
+// POST Single Message Request Handler
 const addNewMessage = (req, res) => {
   messageModel.create(req.body, (err, message) => {
     if (err) {
@@ -26,8 +26,9 @@ const addNewMessage = (req, res) => {
   });
 };
 
+// GET Single Message Request Handler
 const showMessage = (req, res) => {
-  messageModel.findById(req.body, (err, msg) => {
+  messageModel.findById({ _id: req.params.messageid }, (err, msg) => {
     if (err) {
       res.status(404).json(err);
     } else {
@@ -36,7 +37,21 @@ const showMessage = (req, res) => {
   });
 };
 
-const updateMessage = (req, res) => {};
+// PUT Edit
+const updateMessage = (req, res) => {
+  messageModel.findOneAndUpdate(
+    { _id: req.params.messageid },
+    req.body,
+    (err, msg) => {
+      if (err) return res.status(500).send(err);
+      const response = {
+        message: "Message updated",
+        id: msg._id
+      };
+      return res.status(200).send(response);
+    }
+  );
+};
 
 // DELETE Request Handler
 const deleteMessage = (req, res) => {
