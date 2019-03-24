@@ -16,7 +16,7 @@ const Header = props => {
 
   return (
     <React.Fragment>
-      <h1>🐈🐈🐈 CAT TALK 🐈🐈🐈</h1>
+      <h1>🐈 CAT TALK 🐈</h1>
       <h3>
         {props.loginMsg} {logoutButton}
       </h3>

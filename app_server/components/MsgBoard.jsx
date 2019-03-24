@@ -237,7 +237,6 @@ class MsgBoard extends React.Component {
         .then(response => this.handleHTTPErrors(response))
         .then(result => result.json())
         .then(result => {
-          console.log(this.state.messages);
           let newMsgs = this.state.messages;
           let msgIndex = newMsgs.findIndex(
             message => result.id === message._id

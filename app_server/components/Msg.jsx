@@ -13,7 +13,6 @@ class Msg extends React.Component {
   }
 
   handleMessage(event) {
-    console.log("props", this.props);
     let id = this.props.id;
     let action = event.target.id;
     this.props.handleMsgCallback(
@@ -35,7 +34,6 @@ class Msg extends React.Component {
         message: event.target.value
       });
     }
-    console.log(this.state);
   }
 
   render() {
