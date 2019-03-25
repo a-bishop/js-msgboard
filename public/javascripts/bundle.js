@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nconst Footer = props => {\n  return React.createElement(\"p\", null, \"\\xA92019 Andrew Bishop\");\n};\n\nmodule.exports = Footer;\n\n//# sourceURL=webpack:///./app_server/components/Footer.jsx?");
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nconst Footer = props => {\n  return React.createElement(\"p\", null, \"2019 Andrew Bishop\");\n};\n\nmodule.exports = Footer;\n\n//# sourceURL=webpack:///./app_server/components/Footer.jsx?");
 
 /***/ }),
 
