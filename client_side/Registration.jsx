@@ -17,7 +17,6 @@
  * be broken down into several smaller components.
  * - I'll add it to my to-do list.
  * - Tests should be written for it (TDD)
- * - One more comment to trigger update...
  *
  **************************************************/
 const React = require("react");
