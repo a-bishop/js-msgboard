@@ -29,9 +29,8 @@ const addNewMessage = (req, res) => {
 // GET Single Message Request Handler
 const showMessage = (req, res) => {
   messageModel.findById({ _id: req.params.messageid }, (err, msg) => {
-    console.log(req.params.email);
-    // If not authorized
-    if (req.params.email !== msg.email) {
+    // If not authorized send 403 response
+    if (req.params.name !== msg.name) {
       res.status(403).json(err);
     } else if (err) {
       res.status(404).json(err);
@@ -47,7 +46,8 @@ const updateMessage = (req, res) => {
     { _id: req.params.messageid },
     req.body,
     (err, msg) => {
-      if (req.params.email !== msg.email) {
+      // If not authorized send 403 response
+      if (req.params.name !== msg.name) {
         res.status(403).json(err);
       } else if (err) return res.status(500).send(err);
       const response = {
@@ -62,20 +62,18 @@ const updateMessage = (req, res) => {
 // DELETE Request Handler
 const deleteMessage = (req, res) => {
   messageModel.findOneAndDelete(req.body, (err, msg) => {
-    if (req.params.email !== msg.email) {
+    // If not authorized send 403 response
+    if (req.params.name !== (msg.name || "Admin")) {
       res.status(403).json(err);
     } else if (err) return res.status(500).send(err);
-    const response = {
-      message: "Message deleted",
-      id: msg._id
-    };
-    return res.status(200).send(response);
+    return res.status(200).send(msg);
   });
 };
 
 const deleteAllMessages = (req, res) => {
-  messageModel.deleteMany({}, (err, msg) => {
-    if (req.params.email !== "admin@test.com") {
+  messageModel.deleteMany({}, err => {
+    // If not authorized send 403 response
+    if (req.body.name !== "Admin") {
       res.status(403).json(err);
     } else if (err) return res.status(500).send(err);
     const response = {

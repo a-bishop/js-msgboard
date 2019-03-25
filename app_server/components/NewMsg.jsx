@@ -42,6 +42,11 @@ class NewMsg extends React.Component {
 
     // pass control to MsgBoard so it can make the API Call and update messages there
     this.props.addMsgCallback({ name: name, msg: msg });
+
+    this.setState({
+      name: "",
+      msg: ""
+    });
   }
 
   render() {

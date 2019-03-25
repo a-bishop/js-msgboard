@@ -20,6 +20,27 @@ class MsgList extends React.Component {
   }
 
   render() {
+    let body = <tbody />;
+    if (this.state.messages.length > 0) {
+      body = (
+        <tbody>
+          {this.state.messages.map((message, index) => (
+            <Msg
+              key={index}
+              displayId={index + 1}
+              id={message._id}
+              msgName={message.name}
+              userName={this.props.userName}
+              msgEmail={message.email}
+              msg={message.msg}
+              handleMsgCallback={this.handleMessage}
+              messageEditable={this.props.messageEditable}
+            />
+          ))}
+        </tbody>
+      );
+    }
+
     return (
       <table className="table table-striped table-bordered">
         <thead>
@@ -38,21 +59,7 @@ class MsgList extends React.Component {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {this.state.messages.map((message, index) => (
-            <Msg
-              key={index}
-              displayId={index + 1}
-              id={message._id}
-              name={message.name}
-              userEmail={this.props.email}
-              messageCreator={message.email}
-              msg={message.msg}
-              handleMsgCallback={this.handleMessage}
-              messageEditable={this.props.messageEditable}
-            />
-          ))}
-        </tbody>
+        {body}
       </table>
     );
   }

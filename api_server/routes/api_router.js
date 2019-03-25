@@ -11,13 +11,10 @@ router
     passport.authenticate("basic", { session: false }),
     msgAPIController.addNewMessage
   )
-  .delete(
-    passport.authenticate("basic", { session: false }),
-    msgAPIController.deleteAllMessages
-  );
+  .delete(msgAPIController.deleteAllMessages);
 
 router
-  .route("/msgs/:email/:messageid")
+  .route("/msgs/:name/:messageid")
   .get(msgAPIController.showMessage)
   .put(msgAPIController.updateMessage)
   .delete(msgAPIController.deleteMessage);
