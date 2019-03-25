@@ -49,13 +49,10 @@ class MsgBoard extends React.Component {
       .then(response => this.handleHTTPErrors(response))
       .then(response => response.json())
       .then(result => {
-        this.setState(
-          {
-            messages: result,
-            loading: false
-          },
-          () => console.log(this.state)
-        );
+        this.setState({
+          messages: result,
+          loading: false
+        });
       })
       .catch(error => {
         console.log(error);
@@ -263,7 +260,6 @@ class MsgBoard extends React.Component {
             msg: message,
             name: name
           });
-          console.log(msgIndex);
           this.setState({
             messages: newMsgs,
             messageEditable: 0
@@ -286,7 +282,6 @@ class MsgBoard extends React.Component {
       .then(response => this.handleHTTPErrors(response))
       .then(result => result.json())
       .then(result => {
-        console.log(result);
         this.setState({
           messages: ""
         });
@@ -313,7 +308,6 @@ class MsgBoard extends React.Component {
       .then(response => this.handleHTTPErrors(response))
       .then(result => result.json())
       .then(result => {
-        console.log([result]);
         let newMsgs;
         if (this.state.messages === "") {
           newMsgs = [result];
