@@ -32,6 +32,7 @@ class MsgBoard extends React.Component {
     this.register = this.register.bind(this);
     this.addNewUser = this.addNewUser.bind(this);
     this.logout = this.logout.bind(this);
+    this.doneRegistering = this.doneRegistering.bind(this);
   }
 
   handleHTTPErrors(response) {
@@ -161,6 +162,12 @@ class MsgBoard extends React.Component {
   register() {
     this.setState({
       registrationForm: true
+    });
+  }
+
+  doneRegistering() {
+    this.setState({
+      registrationForm: false
     });
   }
 
@@ -338,7 +345,10 @@ class MsgBoard extends React.Component {
       }
       return (
         <div>
-          <Registration registerNewUserCallback={this.addNewUser} />
+          <Registration
+            registerNewUserCallback={this.addNewUser}
+            isDoneRegisteringCallback={this.doneRegistering}
+          />
           {failedRegistration}
         </div>
       );

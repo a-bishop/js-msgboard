@@ -31,6 +31,7 @@ class Registration extends React.Component {
     this.registerUser = this.registerUser.bind(this);
     this.checkPassword = this.checkPassword.bind(this);
     this.checkEmail = this.checkEmail.bind(this);
+    this.showLogin = this.showLogin.bind(this);
     this.state = {
       email: "",
       user: "",
@@ -106,6 +107,10 @@ class Registration extends React.Component {
         });
       }
     );
+  }
+
+  showLogin() {
+    this.props.isDoneRegisteringCallback();
   }
 
   /* This method checks the email address entered against a regular expression.
@@ -352,11 +357,17 @@ class Registration extends React.Component {
                 <button
                   type="submit"
                   className={
-                    "btn btn-lg btn-primary " +
+                    "btn btn-lg btn-primary mr-1 mb-1" +
                     (this.canRegister() ? "" : "disabled")
                   }
                 >
                   Register
+                </button>
+                <button
+                  className={"btn btn-lg btn-secondary"}
+                  onClick={this.showLogin}
+                >
+                  Back To Login
                 </button>
               </div>
             </div>
