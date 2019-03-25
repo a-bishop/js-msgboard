@@ -42,8 +42,6 @@ class Msg extends React.Component {
   }
 
   render() {
-    console.log("msg state", this.state);
-    console.log("msg props", this.props);
     let userActions;
     let editOrCancelButton = (
       <button

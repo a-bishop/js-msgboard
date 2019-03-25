@@ -63,9 +63,9 @@ const updateMessage = (req, res) => {
 const deleteMessage = (req, res) => {
   messageModel.findOneAndDelete(req.body, (err, msg) => {
     // If not authorized send 403 response
-    if (req.params.name !== (msg.name || "Admin")) {
+    if (req.params.name !== msg.name && req.params.name !== "Admin") {
       res.status(403).json(err);
-    } else if (err) return res.status(500).send(err);
+    }
     return res.status(200).send(msg);
   });
 };
@@ -75,7 +75,7 @@ const deleteAllMessages = (req, res) => {
     // If not authorized send 403 response
     if (req.body.name !== "Admin") {
       res.status(403).json(err);
-    } else if (err) return res.status(500).send(err);
+    }
     const response = {
       message: "All messages deleted"
     };
