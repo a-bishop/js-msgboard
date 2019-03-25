@@ -22,7 +22,7 @@ variables:
   # hostname of the DOKKU deployment server
   DEPLOY_SRV: deploy.cs.camosun.bc.ca
   # you can change this to "false" after deploying your DB
-  DEPLOY_DB: "true"
+  DEPLOY_DB: "false"
   # replace $GITLAB_USER_EMAIL with your D2L one if so desired
   LE_EMAIL: $GITLAB_USER_EMAIL
   # change to false after deploying cert

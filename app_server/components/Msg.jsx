@@ -67,19 +67,38 @@ class Msg extends React.Component {
       );
     }
     if (this.props.userName === "Admin") {
-      userActions = (
-        <td>
-          <button
-            id="delete"
-            className="btn btn-danger mb-1"
-            onClick={this.handleMessage}
-          >
-            Delete
-          </button>
-        </td>
-      );
-    }
-    if (this.props.msgName === this.props.userName) {
+      if (this.props.msgName === this.props.userName) {
+        userActions = (
+          <td>
+            <div className="input-group">
+              {editOrCancelButton}
+              <button
+                id="delete"
+                className="btn btn-danger mb-1"
+                onClick={this.handleMessage}
+              >
+                Delete
+              </button>
+            </div>
+          </td>
+        );
+      } else {
+        userActions = (
+          <td>
+            <button
+              id="delete"
+              className="btn btn-danger mb-1"
+              onClick={this.handleMessage}
+            >
+              Delete
+            </button>
+          </td>
+        );
+      }
+    } else if (
+      this.props.msgName === this.props.userName &&
+      this.props.userName !== "Admin"
+    ) {
       userActions = (
         <td>
           <div className="input-group">
