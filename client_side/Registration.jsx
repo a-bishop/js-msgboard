@@ -249,13 +249,10 @@ class Registration extends React.Component {
           <h4 className="card-title">Register:</h4>
           <form onSubmit={this.registerUser}>
             <div className="form-group row">
-              <label
-                htmlFor="email"
-                className="col-3 col-form-label text-right"
-              >
+              <label htmlFor="email" className="col-md-3 col-form-label">
                 Email:
               </label>
-              <div className="col-9">
+              <div className="col-md-9">
                 <input
                   id="email"
                   type="email"
@@ -266,16 +263,16 @@ class Registration extends React.Component {
                 />
               </div>
             </div>
-            <div className="col-9 offset-3">
+            <div className="col-9">
               <p className="text-danger">
                 {!this.state.allFieldsOk.email ? "invalid email address" : ""}
               </p>
             </div>
             <div className="form-group row">
-              <label htmlFor="user" className="col-3 col-form-label text-right">
+              <label htmlFor="user" className="col-md-3 col-form-label">
                 Username:
               </label>
-              <div className="col-9">
+              <div className="col-md-9">
                 <input
                   id="user"
                   type="text"
@@ -292,13 +289,10 @@ class Registration extends React.Component {
               </p>
             </div>
             <div className="form-group row">
-              <label
-                htmlFor="password"
-                className="col-3 col-form-label text-right"
-              >
+              <label htmlFor="password" className="col-md-3 col-form-label">
                 Enter Password:
               </label>
-              <div className="col-9">
+              <div className="col-md-9">
                 <input
                   id="password"
                   type="password"
@@ -310,7 +304,7 @@ class Registration extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-9 offset-3">
+              <div className="col-md-9">
                 <ul>
                   {processedRules.map(processedRule => {
                     if (processedRule.isCompleted) {
@@ -333,11 +327,11 @@ class Registration extends React.Component {
             <div className="form-group row">
               <label
                 htmlFor="repeat-password"
-                className="col-3 col-form-label text-right"
+                className="col-md-3 col-form-label"
               >
                 Repeat Password:
               </label>
-              <div className="col-9">
+              <div className="col-md-9">
                 <input
                   id="repeat-password"
                   type="password"
@@ -348,7 +342,7 @@ class Registration extends React.Component {
                 />
               </div>
             </div>
-            <div className="col-9 offset-3">
+            <div className="col-9">
               <p className="text-danger">
                 {!this.state.allFieldsOk.rpass ? "passwords don't match" : ""}
               </p>
