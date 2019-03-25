@@ -10,7 +10,7 @@ class Msg extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
-    this.cancelEdit = this.cancelEdit.bind(this);
+    this.cancelEditing = this.cancelEditing.bind(this);
   }
 
   handleMessage(event) {
@@ -35,7 +35,7 @@ class Msg extends React.Component {
     });
   }
 
-  cancelEdit() {
+  cancelEditing() {
     this.setState({
       doneEditing: true
     });
@@ -60,7 +60,7 @@ class Msg extends React.Component {
         <button
           id="cancel"
           className="btn btn-warning mr-3 mb-1"
-          onClick={this.cancelEdit}
+          onClick={this.cancelEditing}
         >
           Cancel
         </button>
