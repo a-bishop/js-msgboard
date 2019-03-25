@@ -249,7 +249,7 @@ class Registration extends React.Component {
     });
 
     return (
-      <div className="card col-12 col-sm-8 my-3">
+      <div className="card col-12 col-lg-8 my-3">
         <div className="card-body">
           <h4 className="card-title">Register:</h4>
           <form onSubmit={this.registerUser}>
