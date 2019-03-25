@@ -268,7 +268,7 @@ class Registration extends React.Component {
                 />
               </div>
             </div>
-            <div className="col-9">
+            <div className="col-md-12">
               <p className="text-danger">
                 {!this.state.allFieldsOk.email ? "invalid email address" : ""}
               </p>
@@ -288,7 +288,7 @@ class Registration extends React.Component {
                 />
               </div>
             </div>
-            <div className="col-9 offset-3">
+            <div className="col-md-12">
               <p className="text-danger">
                 {!this.state.allFieldsOk.user ? "invalid username" : ""}
               </p>
@@ -309,7 +309,7 @@ class Registration extends React.Component {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-9">
+              <div className="col-md-12">
                 <ul>
                   {processedRules.map(processedRule => {
                     if (processedRule.isCompleted) {
@@ -357,14 +357,14 @@ class Registration extends React.Component {
                 <button
                   type="submit"
                   className={
-                    "btn btn-lg btn-primary mr-1 mb-1" +
+                    "btn btn-lg btn-primary mr-1 mb-1 " +
                     (this.canRegister() ? "" : "disabled")
                   }
                 >
                   Register
                 </button>
                 <button
-                  className={"btn btn-lg btn-secondary"}
+                  className={"btn btn-lg btn-secondary mb-1"}
                   onClick={this.showLogin}
                 >
                   Back To Login
