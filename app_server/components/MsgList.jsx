@@ -28,7 +28,7 @@ class MsgList extends React.Component {
             <Msg
               isLoggedOut={this.props.isLoggedOut}
               key={index}
-              displayId={index + 1}
+              // displayId={index + 1}
               id={message._id}
               msgName={message.name}
               userName={this.props.userName}
@@ -55,9 +55,6 @@ class MsgList extends React.Component {
       <table className="table table-striped table-bordered">
         <thead>
           <tr>
-            <th scope="col" className="col-1">
-              #
-            </th>
             <th scope="col" className="col-2">
               Name
             </th>
