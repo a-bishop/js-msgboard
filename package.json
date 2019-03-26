@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nodemon -e js,jsx --exec \"node -r dotenv/config ./bin/www\"",
     "start": "node ./bin/www",
-    "build": "webpack"
+    "build": "webpack --watch"
   },
   "dependencies": {
     "bad-words": "^3.0.1",

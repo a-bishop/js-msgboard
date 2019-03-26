@@ -383,6 +383,7 @@ class MsgBoard extends React.Component {
             {form}
             <MsgList
               userName={this.state.userName}
+              isLoggedOut={this.state.loginForm}
               messages={this.state.messages}
               handleMsgCallback={this.handleEditMessage}
               messageEditable={this.state.messageEditable}

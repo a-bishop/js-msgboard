@@ -113,6 +113,8 @@ class Msg extends React.Component {
           </div>
         </td>
       );
+    } else if (this.props.isLoggedOut) {
+      userActions = null;
     } else {
       userActions = <td />;
     }

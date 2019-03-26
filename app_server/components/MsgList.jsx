@@ -26,6 +26,7 @@ class MsgList extends React.Component {
         <tbody>
           {this.state.messages.map((message, index) => (
             <Msg
+              isLoggedOut={this.props.isLoggedOut}
               key={index}
               displayId={index + 1}
               id={message._id}
@@ -41,6 +42,15 @@ class MsgList extends React.Component {
       );
     }
 
+    let actionColumn = (
+      <th scope="col" className="col-2">
+        Action
+      </th>
+    );
+    if (this.props.isLoggedOut) {
+      actionColumn = null;
+    }
+
     return (
       <table className="table table-striped table-bordered">
         <thead>
@@ -51,12 +61,13 @@ class MsgList extends React.Component {
             <th scope="col" className="col-2">
               Name
             </th>
-            <th scope="col" className="col-7">
+            <th
+              scope="col"
+              className={this.props.isLoggedOut ? "col-9" : "col-7"}
+            >
               Message
             </th>
-            <th scope="col" className="col-2">
-              Action
-            </th>
+            {actionColumn}
           </tr>
         </thead>
         {body}
