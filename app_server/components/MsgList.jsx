@@ -60,7 +60,7 @@ class MsgList extends React.Component {
             </th>
             <th
               scope="col"
-              className={this.props.isLoggedOut ? "col-9" : "col-7"}
+              className={this.props.isLoggedOut ? "col-10" : "col-8"}
             >
               Message
             </th>
