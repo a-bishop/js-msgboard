@@ -46,6 +46,7 @@ class MsgBoard extends React.Component {
       "beforeunload",
       this.saveStateToSessionStorage.bind(this)
     );
+    console.log(process.env.API_URL);
     fetch(`${process.env.API_URL}/msgs`)
       .then(response => this.handleHTTPErrors(response))
       .then(response => response.json())
