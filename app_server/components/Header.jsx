@@ -28,12 +28,12 @@ const Header = props => {
     : null;
 
   return (
-    <React.Fragment>
+    <>
       <h1>🐈 CAT TALK 🐈</h1>
       <h3>
         {props.loginMsg} {logoutButton} {deleteAllButton}
       </h3>
-    </React.Fragment>
+    </>
   );
 };
 

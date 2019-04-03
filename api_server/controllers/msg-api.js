@@ -1,5 +1,12 @@
 const mongoose = require("mongoose");
 const messageModel = mongoose.model("message");
+// const server = require("../../bin/www");
+// const http = require("http");
+// var io = require("socket.io")(server);
+
+// io.on("connection", function(socket) {
+//   console.log("socketing!!\n");
+// });
 
 // GET All Messages Request Handler
 const getAllMessagesOrderedByLastPosted = (req, res) => {
@@ -21,6 +28,8 @@ const addNewMessage = (req, res) => {
     if (err) {
       res.status(400).json(err);
     } else {
+      console.log("sending message");
+      io.emit("message", req.body);
       res.status(201).json(message);
     }
   });

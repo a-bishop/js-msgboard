@@ -21,6 +21,13 @@ app.set("port", port);
 
 var server = http.createServer(app);
 
+var io = require("socket.io")(server);
+
+io.on("connection", function(socket) {
+  console.log("socket working");
+  socket.emit("news", { hello: "world" });
+});
+
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -84,3 +91,7 @@ function onListening() {
   var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
 }
+
+module.exports = {
+  server
+};

@@ -315,6 +315,7 @@ class MsgBoard extends React.Component {
       .then(response => this.handleHTTPErrors(response))
       .then(result => result.json())
       .then(result => {
+        console.log(result);
         let newMsgs;
         if (this.state.messages === "") {
           newMsgs = [result];
