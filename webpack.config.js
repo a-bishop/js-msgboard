@@ -7,7 +7,12 @@ module.exports = {
     path: path.join(__dirname, "/public/javascripts/"),
     filename: "bundle.js"
   },
-  plugins: [new Dotenv()],
+  plugins: [
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      API_URL: JSON.stringify(process.env.API_URL)
+    })
+  ],
   module: {
     rules: [
       {
