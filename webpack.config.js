@@ -10,7 +10,7 @@ module.exports = {
   plugins: [
     new Dotenv(),
     new webpack.DefinePlugin({
-      API_URL: JSON.stringify(process.env.API_URL)
+      "process.env.API_URL": JSON.stringify(process.env.API_URL)
     })
   ],
   module: {
