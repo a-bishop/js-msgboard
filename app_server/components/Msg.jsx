@@ -132,7 +132,6 @@ class Msg extends React.Component {
     ) {
       table = (
         <tr className="align-items-center">
-          {/* <td>{this.props.displayId}</td> */}
           <td>{this.props.msgName}</td>
           <td>
             <form>

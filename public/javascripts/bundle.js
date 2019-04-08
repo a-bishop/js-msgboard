@@ -93,7 +93,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nconst Footer = props => {\n  return React.createElement(\"p\", null, \"\\xA9 2019 \", React.createElement(\"a\", {\n    href: \"https://andrewnbishop.com\"\n  }, \"Andrew Bishop\"));\n};\n\nmodule.exports = Footer;\n\n//# sourceURL=webpack:///./app_server/components/Footer.jsx?");
+eval("const React = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nconst Footer = props => {\n  return React.createElement(\"p\", null, \"\\xA9 2019 \", React.createElement(\"a\", {\n    href: \"https://andrewnbishop.com\"\n  }, \"Andrew Bishop\"), \".\", \" \", React.createElement(\"a\", {\n    href: \"https://github.com/a-bishop/podBlast\"\n  }, \"View the code\"), \".\");\n};\n\nmodule.exports = Footer;\n\n//# sourceURL=webpack:///./app_server/components/Footer.jsx?");
 
 /***/ }),
 
