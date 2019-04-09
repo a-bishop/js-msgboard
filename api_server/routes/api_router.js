@@ -15,7 +15,10 @@ router
 
 router
   .route("/msgs/:name/:messageid")
-  .get(msgAPIController.showMessage)
+  .get(
+    passport.authenticate("basic", { session: false }),
+    msgAPIController.showMessage
+  )
   .put(msgAPIController.updateMessage)
   .delete(msgAPIController.deleteMessage);
 

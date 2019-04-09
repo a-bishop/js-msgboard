@@ -22,8 +22,7 @@ class MsgBoard extends React.Component {
       },
       registrationForm: false,
       registrationFail: false,
-      messageEditable: 0,
-      messageToEdit: ""
+      messageEditable: 0
     };
 
     this.addMessage = this.addMessage.bind(this);
@@ -75,7 +74,7 @@ class MsgBoard extends React.Component {
   saveStateToSessionStorage() {
     // for every item in React state
     for (let key in this.state) {
-      // save to sessionStorage except sensitive credentials and the messages
+      // save to sessionStorage except for a few unneeded values
       if (
         key !== "messages" &&
         key !== "loading" &&
@@ -134,7 +133,7 @@ class MsgBoard extends React.Component {
         this.setState(state => {
           return {
             loginFail: true,
-            loginAttempts: state.loginAttempts - 1
+            loginAttempts: this.state.loginAttempts - 1
           };
         });
         console.log(error);
@@ -209,12 +208,17 @@ class MsgBoard extends React.Component {
   }
 
   handleEditMessage(id, action, name, message, email) {
+    const basicString =
+      this.state.userCredentials.email +
+      ":" +
+      this.state.userCredentials.password;
     if (action === "delete") {
       let idObj = { _id: id };
       fetch(`${process.env.API_URL}/msgs/${name}/${id}`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa(basicString)
         },
         body: JSON.stringify(idObj)
       })
@@ -234,15 +238,15 @@ class MsgBoard extends React.Component {
       fetch(`${process.env.API_URL}/msgs/${name}/${id}`, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa(basicString)
         }
       })
         .then(response => this.handleHTTPErrors(response))
         .then(result => result.json())
         .then(result => {
           this.setState({
-            messageEditable: result._id,
-            messageToEdit: result.msg
+            messageEditable: result._id
           });
         })
         .catch(error => {
@@ -253,7 +257,8 @@ class MsgBoard extends React.Component {
       fetch(`${process.env.API_URL}/msgs/${name}/${id}`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: "Basic " + btoa(basicString)
         },
         body: body
       })
@@ -282,10 +287,15 @@ class MsgBoard extends React.Component {
   }
 
   deleteAllMessages() {
+    const basicString =
+      this.state.userCredentials.email +
+      ":" +
+      this.state.userCredentials.password;
     fetch(`${process.env.API_URL}/msgs`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: "Basic " + btoa(basicString)
       },
       body: JSON.stringify({ name: this.state.userName })
     })
@@ -376,7 +386,7 @@ class MsgBoard extends React.Component {
       }
       if (!this.state.loading) {
         return (
-          <React.Fragment>
+          <>
             <Header
               loginMsg={this.state.loginMsg}
               userName={this.state.userName}
@@ -391,9 +401,8 @@ class MsgBoard extends React.Component {
               messages={this.state.messages}
               handleMsgCallback={this.handleEditMessage}
               messageEditable={this.state.messageEditable}
-              messageToEdit={this.state.messageToEdit}
             />
-          </React.Fragment>
+          </>
         );
       } else {
         return null;

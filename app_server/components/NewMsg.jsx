@@ -59,7 +59,7 @@ class NewMsg extends React.Component {
             </label>
           </div>
           <div className="row">
-            <div className="col-10">
+            <div className="col-9">
               <input
                 id="msg"
                 type="text"
@@ -69,7 +69,7 @@ class NewMsg extends React.Component {
                 onChange={this.handleText}
               />
             </div>
-            <div className="col-2">
+            <div className="col-3">
               <button type="submit" className="btn btn-primary">
                 Post
               </button>

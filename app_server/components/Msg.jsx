@@ -42,7 +42,6 @@ class Msg extends React.Component {
   }
 
   render() {
-    console.log(this.props.messageToEdit);
     let userActions;
     let editOrCancelButton = (
       <button
@@ -143,7 +142,7 @@ class Msg extends React.Component {
                   type="text"
                   className="form-control mr-3 mb-1"
                   placeholder="Edit Message"
-                  value={this.props.messageToEdit}
+                  value={this.state.message}
                   onChange={this.handleChange}
                 />
                 <button
