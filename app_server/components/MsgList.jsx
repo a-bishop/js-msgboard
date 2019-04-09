@@ -35,6 +35,7 @@ class MsgList extends React.Component {
               msg={message.msg}
               handleMsgCallback={this.handleMessage}
               messageEditable={this.props.messageEditable}
+              messageToEdit={this.props.messageToEdit}
             />
           ))}
         </tbody>

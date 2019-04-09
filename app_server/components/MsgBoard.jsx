@@ -22,7 +22,8 @@ class MsgBoard extends React.Component {
       },
       registrationForm: false,
       registrationFail: false,
-      messageEditable: 0
+      messageEditable: 0,
+      messageToEdit: ""
     };
 
     this.addMessage = this.addMessage.bind(this);
@@ -240,7 +241,8 @@ class MsgBoard extends React.Component {
         .then(result => result.json())
         .then(result => {
           this.setState({
-            messageEditable: result._id
+            messageEditable: result._id,
+            messageToEdit: result.msg
           });
         })
         .catch(error => {
@@ -389,6 +391,7 @@ class MsgBoard extends React.Component {
               messages={this.state.messages}
               handleMsgCallback={this.handleEditMessage}
               messageEditable={this.state.messageEditable}
+              messageToEdit={this.state.messageToEdit}
             />
           </React.Fragment>
         );
