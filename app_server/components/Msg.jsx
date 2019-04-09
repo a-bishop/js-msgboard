@@ -69,7 +69,7 @@ class Msg extends React.Component {
     if (this.props.userName === "Admin") {
       if (this.props.msgName === this.props.userName) {
         userActions = (
-          <td>
+          <td className="col-3">
             <div className="input-group">
               {editOrCancelButton}
               <button
@@ -84,7 +84,7 @@ class Msg extends React.Component {
         );
       } else {
         userActions = (
-          <td>
+          <td className="col-3">
             <button
               id="delete"
               className="btn btn-danger mb-1"
@@ -100,7 +100,7 @@ class Msg extends React.Component {
       this.props.userName !== "Admin"
     ) {
       userActions = (
-        <td>
+        <td className="col-3">
           <div className="input-group">
             {editOrCancelButton}
             <button
@@ -116,13 +116,14 @@ class Msg extends React.Component {
     } else if (this.props.isLoggedOut) {
       userActions = null;
     } else {
-      userActions = <td />;
+      userActions = <td className="col-3" />;
     }
     let table = (
-      <tr className="align-items-center">
-        {/* <td>{this.props.displayId}</td> */}
-        <td>{this.props.msgName}</td>
-        <td>{this.props.msg}</td>
+      <tr className="d-flex">
+        <td className="col-3">{this.props.msgName}</td>
+        <td className={this.props.isLoggedOut ? "col-9" : "col-6"}>
+          {this.props.msg}
+        </td>
         {userActions}
       </tr>
     );
@@ -131,9 +132,9 @@ class Msg extends React.Component {
       !this.state.doneEditing
     ) {
       table = (
-        <tr className="align-items-center">
-          <td>{this.props.msgName}</td>
-          <td>
+        <tr className="d-flex">
+          <td className="col-3">{this.props.msgName}</td>
+          <td className="col-6">
             <form>
               <div className="input-group">
                 <input
