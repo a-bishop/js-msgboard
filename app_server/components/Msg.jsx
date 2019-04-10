@@ -6,7 +6,7 @@ class Msg extends React.Component {
     this.handleMessage = this.handleMessage.bind(this);
     this.state = {
       message: this.props.msg,
-      doneEditing: false
+      doneEditing: true
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
@@ -15,9 +15,12 @@ class Msg extends React.Component {
 
   handleMessage(event) {
     event.preventDefault();
-    this.setState({
-      doneEditing: false
-    });
+    if (event.target.id === "edit") {
+      this.setState({
+        message: this.props.msg,
+        doneEditing: false
+      });
+    }
     let id = this.props.id;
     let action = event.target.id;
     this.props.handleMsgCallback(
@@ -42,8 +45,16 @@ class Msg extends React.Component {
   }
 
   render() {
-    let userActions;
-    let editOrCancelButton = (
+    const cancelButton = (
+      <button
+        id="cancel"
+        className="btn btn-warning mr-3 mb-1"
+        onClick={this.cancelEditing}
+      >
+        Cancel
+      </button>
+    );
+    const editButton = (
       <button
         id="edit"
         className="btn btn-primary mr-3 mb-1"
@@ -52,76 +63,60 @@ class Msg extends React.Component {
         Edit
       </button>
     );
+    const deleteButton = (
+      <button
+        id="delete"
+        className="btn btn-danger mb-1"
+        onClick={this.handleMessage}
+      >
+        Delete
+      </button>
+    );
+    const updateButton = (
+      <button
+        type="submit"
+        id="update"
+        className="btn btn-primary"
+        onClick={this.handleMessage}
+      >
+        Update
+      </button>
+    );
+    let editOrCancelButton = editButton;
     if (
       this.props.id === this.props.messageEditable &&
       !this.state.doneEditing
     ) {
-      editOrCancelButton = (
-        <button
-          id="cancel"
-          className="btn btn-warning mr-3 mb-1"
-          onClick={this.cancelEditing}
-        >
-          Cancel
-        </button>
-      );
+      editOrCancelButton = cancelButton;
     }
-    if (this.props.userName === "Admin") {
-      if (this.props.msgName === this.props.userName) {
-        userActions = (
-          <td className="col-3">
-            <div className="input-group">
-              {editOrCancelButton}
-              <button
-                id="delete"
-                className="btn btn-danger mb-1"
-                onClick={this.handleMessage}
-              >
-                Delete
-              </button>
-            </div>
-          </td>
-        );
-      } else {
-        userActions = (
-          <td className="col-3">
-            <button
-              id="delete"
-              className="btn btn-danger mb-1"
-              onClick={this.handleMessage}
-            >
-              Delete
-            </button>
-          </td>
-        );
-      }
-    } else if (
-      this.props.msgName === this.props.userName &&
-      this.props.userName !== "Admin"
-    ) {
+    let userActions;
+    if (this.props.isLoggedOut) {
+      userActions = null;
+    } else if (this.props.msgName === this.props.userName) {
       userActions = (
-        <td className="col-3">
+        <td className="col-3 col-lg-2">
           <div className="input-group">
             {editOrCancelButton}
-            <button
-              id="delete"
-              className="btn btn-danger mb-1"
-              onClick={this.handleMessage}
-            >
-              Delete
-            </button>
+            {deleteButton}
           </div>
         </td>
       );
-    } else if (this.props.isLoggedOut) {
-      userActions = null;
+    } else if (
+      this.props.userName === "Admin" &&
+      this.props.msgName !== this.props.userName
+    ) {
+      userActions = <td className="col-3 col-lg-2">{deleteButton}</td>;
     } else {
-      userActions = <td className="col-3" />;
+      userActions = <td className="col-3 col-lg-2" />;
     }
-    let table = (
+    let tableRow = (
       <tr className="d-flex">
         <td className="col-3">{this.props.msgName}</td>
-        <td className={this.props.isLoggedOut ? "col-9" : "col-6"}>
+        <td
+          className={
+            this.props.isLoggedOut ? "col-9 col-lg-10" : "col-6 col-lg-7"
+          }
+        >
           {this.props.msg}
         </td>
         {userActions}
@@ -131,36 +126,27 @@ class Msg extends React.Component {
       this.props.id === this.props.messageEditable &&
       !this.state.doneEditing
     ) {
-      table = (
+      tableRow = (
         <tr className="d-flex">
           <td className="col-3">{this.props.msgName}</td>
-          <td className="col-6">
+          <td className="col-6 col-lg-7">
             <form>
-              <div className="input-group">
-                <input
-                  id="message"
-                  type="text"
-                  className="form-control mr-3 mb-1"
-                  placeholder="Edit Message"
-                  value={this.state.message}
-                  onChange={this.handleChange}
-                />
-                <button
-                  type="submit"
-                  id="update"
-                  className="btn btn-primary"
-                  onClick={this.handleMessage}
-                >
-                  Update
-                </button>
-              </div>
+              <textarea
+                id="message"
+                type="text"
+                className="form-control mr-3 mb-1"
+                placeholder="Edit Message"
+                value={this.state.message}
+                onChange={this.handleChange}
+              />
+              {updateButton}
             </form>
           </td>
           {userActions}
         </tr>
       );
     }
-    return <>{table}</>;
+    return <>{tableRow}</>;
   }
 }
 

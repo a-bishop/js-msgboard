@@ -24,7 +24,7 @@ function handleHTTPErrors(response) {
 // index handler
 const renderIndex = (req, res, msgs) => {
   res.render("index", {
-    title: "CATS. DISCUSS....",
+    title: "Cats. Discuss...",
     // header: ReactDOMServer.renderToString(Header()),
     footer: ReactDOMServer.renderToString(Footer()),
     msgBoard: ReactDOMServer.renderToString(MsgBoard({ messages: msgs })),

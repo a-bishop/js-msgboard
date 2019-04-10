@@ -42,7 +42,7 @@ class MsgList extends React.Component {
     }
 
     let actionColumn = (
-      <th scope="col" className="col-3">
+      <th scope="col" className="col-3 col-lg-2">
         Action
       </th>
     );
@@ -59,7 +59,9 @@ class MsgList extends React.Component {
             </th>
             <th
               scope="col"
-              className={this.props.isLoggedOut ? "col-9" : "col-6"}
+              className={
+                this.props.isLoggedOut ? "col-9 col-lg-10" : "col-6 col-lg-7"
+              }
             >
               Message
             </th>
