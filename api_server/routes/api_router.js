@@ -11,7 +11,10 @@ router
     passport.authenticate("basic", { session: false }),
     msgAPIController.addNewMessage
   )
-  .delete(msgAPIController.deleteAllMessages);
+  .delete(
+    passport.authenticate("basic", { session: false }),
+    msgAPIController.deleteAllMessages
+  );
 
 router
   .route("/msgs/:name/:messageid")
@@ -19,8 +22,14 @@ router
     passport.authenticate("basic", { session: false }),
     msgAPIController.showMessage
   )
-  .put(msgAPIController.updateMessage)
-  .delete(msgAPIController.deleteMessage);
+  .put(
+    passport.authenticate("basic", { session: false }),
+    msgAPIController.updateMessage
+  )
+  .delete(
+    passport.authenticate("basic", { session: false }),
+    msgAPIController.deleteMessage
+  );
 
 router.route("/users").post(userAPIController.registerNewUser);
 
