@@ -133,7 +133,8 @@ class MsgBoard extends React.Component {
         this.setState(state => {
           return {
             loginFail: true,
-            loginAttempts: this.state.loginAttempts - 1
+            loginAttempts:
+              this.state.loginAttempts > 0 ? this.state.loginAttempts - 1 : 0
           };
         });
         console.log(error);

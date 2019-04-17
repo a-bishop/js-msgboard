@@ -16,10 +16,12 @@ class Login extends React.Component {
     event.preventDefault();
     // pass control to MsgBoard and send
     // the email and pass the user entered
-    this.props.loginCallback({
-      email: this.state.email,
-      password: this.state.password
-    });
+    if (this.props.loginAttempts > 0) {
+      this.props.loginCallback({
+        email: this.state.email,
+        password: this.state.password
+      });
+    }
   }
 
   handleText(event) {
@@ -54,6 +56,15 @@ class Login extends React.Component {
         <p className="card-text pt-1 text-danger">
           Failed Login Attempt. &nbsp;{this.props.loginAttempts} attempts
           remaining.{" "}
+        </p>
+      );
+    }
+
+    if (this.props.loginAttempts === 0) {
+      loginFailText = (
+        <p className="card-text pt-1 text-danger">
+          Too many failed login attempts. You have been locked out of the
+          application.
         </p>
       );
     }
