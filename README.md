@@ -4,4 +4,4 @@ An isomorphic JavaScript message board app with server-side rendered React, Node
 
 # Admin login 
 
-username: "Admin" pass: "Test1234!"
+email: "admin@test.com"" pass: "Test1234!"
