@@ -1,3 +1,3 @@
-# web-services-msgboard
+# Admin login
 
-An isomorphic JavaScript message board app with server-side rendered React, Node, Express, Pug, MongoDB and Mongoose.
+email: "admin@test.com" pass: "Test1234!"
