@@ -4,13 +4,13 @@ const Msg = props => {
   const [message, handleMsgChange] = React.useState(props.msg);
   const [doneEditing, isDoneEditing] = React.useState(true);
 
-  function handleMessage(event) {
+  const handleMessage = event => {
     event.preventDefault();
-    if (event.target.id === "edit") {
+    const action = event.target.id;
+    if (action === "edit") {
       handleMsgChange(props.msg), isDoneEditing(false);
     }
     const id = props.id;
-    const action = event.target.id;
     props.handleMsgCallback(
       id,
       action,
@@ -18,7 +18,7 @@ const Msg = props => {
       message,
       props.msgEmail
     );
-  }
+  };
 
   const cancelButton = (
     <button
@@ -79,9 +79,18 @@ const Msg = props => {
   } else {
     userActions = <td className="col-3 col-lg-2" />;
   }
+
   let tableRow = (
     <tr className="d-flex">
-      <td className="col-3">{props.msgName}</td>
+      <td className="col-3">
+        <img
+          src={`https://avatars.dicebear.com/v2/identicon/${
+            props.msgName
+          }.svg?options[padding]=0.2&options[background]=%23042420`}
+          width="50"
+        />{" "}
+        <span style={{ paddingLeft: "5px" }}> {props.msgName} </span>
+      </td>
       <td className={props.isLoggedOut ? "col-9 col-lg-10" : "col-6 col-lg-7"}>
         {props.msg}
       </td>
@@ -91,7 +100,15 @@ const Msg = props => {
   if (props.id === props.messageEditable && !doneEditing) {
     tableRow = (
       <tr className="d-flex">
-        <td className="col-3">{props.msgName}</td>
+        <td className="col-3">
+          <img
+            src={`https://avatars.dicebear.com/v2/identicon/${
+              props.msgName
+            }.svg?options[padding]=0.2&options[background]=%23042420`}
+            width="50"
+          />{" "}
+          <span style={{ paddingLeft: "5px" }}> {props.msgName} </span>
+        </td>
         <td className="col-6 col-lg-7">
           <form>
             <textarea

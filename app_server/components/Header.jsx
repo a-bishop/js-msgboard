@@ -29,7 +29,7 @@ const Header = props => {
 
   return (
     <>
-      <h1>🐈 Cat Talk 🐈</h1>
+      <h1> 🐈 Cat Talk 🐈</h1>
       <h3>
         {props.loginMsg} {logoutButton} {deleteAllButton}
       </h3>
